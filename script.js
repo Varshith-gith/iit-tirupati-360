@@ -525,24 +525,11 @@ function createInfoHotspotElement(hotspot) {
   // Create tooltip/content
   const tooltip = document.createElement('div');
   tooltip.classList.add('info-hotspot-tooltip');
-  tooltip.style.position = 'absolute';
-  tooltip.style.background = 'rgba(0, 0, 0, 0.9)';
-  tooltip.style.color = 'white';
-  tooltip.style.padding = '12px';
-  tooltip.style.borderRadius = '8px';
-  tooltip.style.fontSize = '14px';
-  tooltip.style.maxWidth = '250px';
   tooltip.style.pointerEvents = 'none';
   tooltip.style.opacity = '0';
-  tooltip.style.transition = 'opacity 0.3s';
-  tooltip.style.zIndex = '1000';
-  tooltip.style.top = '-10px';
-  tooltip.style.left = '50%';
-  tooltip.style.transform = 'translateX(-50%) translateY(-100%)';
+  tooltip.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
   
   const title = document.createElement('div');
-  title.style.fontWeight = 'bold';
-  title.style.marginBottom = '8px';
   title.innerHTML = hotspot.title || 'Info';
   
   const text = document.createElement('div');
@@ -560,8 +547,15 @@ function createInfoHotspotElement(hotspot) {
     e.preventDefault();
     console.log('Info hotspot clicked!');
     isVisible = !isVisible;
-    tooltip.style.opacity = isVisible ? '1' : '0';
-    tooltip.style.pointerEvents = isVisible ? 'auto' : 'none';
+    if (isVisible) {
+      tooltip.style.opacity = '1';
+      tooltip.style.pointerEvents = 'auto';
+      tooltip.classList.add('visible');
+    } else {
+      tooltip.style.opacity = '0';
+      tooltip.style.pointerEvents = 'none';
+      tooltip.classList.remove('visible');
+    }
     console.log('Tooltip visibility:', isVisible);
   }
   
@@ -591,6 +585,7 @@ function createInfoHotspotElement(hotspot) {
       isVisible = false;
       tooltip.style.opacity = '0';
       tooltip.style.pointerEvents = 'none';
+      tooltip.classList.remove('visible');
     }
   };
   
