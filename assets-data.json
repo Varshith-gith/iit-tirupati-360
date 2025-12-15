@@ -1,0 +1,80 @@
+{
+  "layers": {
+    "boundary": {
+      "name": "IIT Tirupati Boundary",
+      "description": "Campus boundary of IIT Tirupati",
+      "type": "Polygon",
+      "totalFeatures": 1,
+      "area": "Approximately 500 acres",
+      "status": "Active",
+      "lastUpdated": "2024-01-15",
+      "attributes": {
+        "coordinateSystem": "WGS84",
+        "boundaryType": "Institutional",
+        "management": "IIT Tirupati Administration"
+      }
+    },
+    "roads": {
+      "name": "IIT Tirupati Roads",
+      "description": "Road network within the IIT Tirupati campus",
+      "type": "LineString",
+      "totalFeatures": 50,
+      "totalLength": "Approximately 8.5 km",
+      "status": "Active",
+      "lastUpdated": "2024-01-15",
+      "attributes": {
+        "roadTypes": ["Main Roads", "Internal Roads", "Pedestrian Paths"],
+        "maintenance": "Regular",
+        "surfaceType": "Asphalt and Concrete"
+      }
+    },
+    "lightPoles": {
+      "name": "Light Poles",
+      "description": "Street lighting infrastructure across the campus",
+      "type": "Point",
+      "totalFeatures": 150,
+      "coverage": "Campus-wide",
+      "status": "Active",
+      "lastUpdated": "2024-01-15",
+      "attributes": {
+        "poleType": "LED Street Lights",
+        "averageHeight": "6-8 meters",
+        "illuminationLevel": "24.018 - 31.52 L",
+        "maintenance": "Regular inspection"
+      }
+    },
+    "buildingsFolder": {
+      "name": "IIT Tirupati Buildings",
+      "description": "All buildings within the IIT Tirupati campus",
+      "type": "Polygon",
+      "totalFeatures": 40,
+      "status": "Active",
+      "lastUpdated": "2024-01-15",
+      "attributes": {
+        "source": "OpenStreetMap",
+        "dataType": "Buildings",
+        "attributes": ["osm_id", "name", "type"]
+      }
+    },
+    "natural": {
+      "name": "Natural Features",
+      "description": "Natural features and landscapes within the campus",
+      "type": "Polygon",
+      "totalFeatures": 3,
+      "status": "Active",
+      "lastUpdated": "2024-01-15",
+      "attributes": {
+        "source": "OpenStreetMap",
+        "dataType": "Natural Features",
+        "attributes": ["osm_id", "name", "type"]
+      }
+    }
+  },
+  "statistics": {
+    "totalAssets": 244,
+    "lastSync": "2024-01-15T10:30:00Z",
+    "dataSource": "IIT Tirupati GIS Department & OpenStreetMap",
+    "coordinateSystem": "WGS84 (EPSG:4326)"
+  }
+}
+

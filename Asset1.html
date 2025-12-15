@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<title>GeoSpatial Intelligence- Asset Management with DigiPin</title>
+
+<!-- Google Fonts - Optimized loading -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geom:wght@400;600;700&display=swap" rel="stylesheet">
+
+<!-- Leaflet -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<!-- Chart.js - Defer loading for faster initial page load -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+
+<!-- Marzipano for tiled 360 images (primary viewer) -->
+<script src="app-files/vendor/marzipano.js"></script>
+<script src="app-files/data.js"></script>
+
+<!-- Custom Styles -->
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+  GeoSpatial Intelligence- Asset Management
+  <div class="header-right">
+    <img src="assets/Logo_TIH.jpeg" alt="IIT Tirupati Logo" />
+    <div class="powered-text">
+      <a>Powered by Geo-Intel Lab IITTNIF</a>
+    </div>
+  </div>
+</header>
+
+<div id="container">
+  <button id="mobileMenuToggle" class="mobile-menu-toggle" aria-label="Toggle Menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+  <div id="sidebar" class="sidebar-mobile">
+    <div id="digipinBox" class="panel">
+      <h3>DIGIPIN</h3>
+      <div id="digipinCode">Code: --</div>
+      <div id="latlng">Lat: --, Lng: --</div>
+    </div>
+
+    <div class="panel">
+      <h3>Basemaps</h3>
+      <div class="button-group">
+        <button onclick="setBase('osm')">OSM</button>
+        <button onclick="setBase('satellite')">Satellite</button>
+        <button onclick="setBase('terrain')">Terrain</button>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h3>Asset Layers</h3>
+      <div><input type="checkbox" id="boundaryLayer" /><label for="boundaryLayer">IIT Tirupati Boundary</label></div>
+      <div><input type="checkbox" id="roadLayer" /><label for="roadLayer">IIT Tirupati Roads</label></div>
+      <div><input type="checkbox" id="buildingsFolderLayer" /><label for="buildingsFolderLayer">IIT Tirupati Buildings</label></div>
+      <div><input type="checkbox" id="lightLayer" /><label for="lightLayer">Light Poles</label></div>
+      <div><input type="checkbox" id="naturalLayer" /><label for="naturalLayer">Natural Features</label></div>
+    </div>
+  </div>
+
+  <div id="map"></div>
+
+  <!-- 360 Viewer Modal Popup -->
+  <div id="viewer360Modal" class="viewer360-modal">
+    <div class="viewer360-modal-content">
+      <button id="close360Viewer" class="close-360-viewer" aria-label="Close 360 Viewer">×</button>
+      <div id="viewer360Title" class="viewer360-title"></div>
+      <button id="prev360Image" class="carousel-btn prev-btn" aria-label="Previous Image">‹</button>
+      <div id="viewer360Container"></div>
+      <button id="next360Image" class="carousel-btn next-btn" aria-label="Next Image">›</button>
+      <div class="directional-arrows">
+        <button id="arrowNorth" class="direction-arrow arrow-north" aria-label="North">↑</button>
+        <button id="arrowSouth" class="direction-arrow arrow-south" aria-label="South">↓</button>
+        <button id="arrowEast" class="direction-arrow arrow-east" aria-label="East">→</button>
+        <button id="arrowWest" class="direction-arrow arrow-west" aria-label="West">←</button>
+      </div>
+    </div>
+  </div>
+
+  <button id="mobileInfoToggle" class="mobile-info-toggle" aria-label="Toggle Info Panel">Summary</button>
+  <div id="infoPanel" class="info-panel-mobile">
+    <h3 class="drag-handle">Summary</h3>
+    <button id="closeInfoPanel" class="close-info-btn" aria-label="Close">×</button>
+    <div id="time"></div>
+    <h3>Selected Asset</h3>
+    <div id="assetInfo">Click a building, light pole, or water body to view attributes.</div>
+    <button id="toggleChartBtn">Show Asset Distribution</button>
+    <div class="chart-container">
+      <canvas id="assetDistributionChart"></canvas>
+    </div>
+  </div>
+</div>
+
+<!-- Custom Script - Defer for faster initial load -->
+<script src="script.js" defer></script>
+</body>
+</html>

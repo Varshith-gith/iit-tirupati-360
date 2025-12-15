@@ -1,0 +1,33 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          79.59450797497396,
+          13.715813476676836
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "id": 1,
+        "Name": "Pond1"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          79.59442507357696,
+          13.713348429014813
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "id": 2,
+        "Name": "Pond2"
+      }
+    }
+  ]
+}

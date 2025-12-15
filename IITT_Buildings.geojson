@@ -1,0 +1,629 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          79.59101511917558,
+          13.70714605102645
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "id": 1,
+        "Name": "x1",
+        "Area": 1153.278,
+        "Tax_Status": "Paid"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          79.59165633610345,
+          13.707254330402133
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "id": 2,
+        "Name": "x2",
+        "Area": 1153.57,
+        "Tax_Status": "Paid"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          79.5921926573861,
+          13.707804186606772
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "id": 3,
+        "Name": "x3",
+        "Area": 1153.275,
+        "Tax_Status": "Paid"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          79.59214501143853,
+          13.708565992365704
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "id": 4,
+        "Name": "x4",
+        "Area": 873.634,
+        "Tax_Status": "Paid"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          79.59204257360359,
+          13.70911634975494
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "id": 5,
+        "Name": "x5",
+        "Area": 873.82,
+        "Tax_Status": "Paid"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          79.59197058871544,
+          13.709628335007997
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "id": 6,
+        "Name": "x6",
+        "Area": 873.848,
+        "Tax_Status": "Paid"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          79.5919264806516,
+          13.710186505973562
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "id": 7,
+        "Name": "x7",
+        "Area": 873.597,
+        "Tax_Status": "Paid"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          79.59177561260317,
+          13.710742110604793
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "id": 8,
+        "Name": "x8",
+        "Area": 873.537,
+        "Tax_Status": "Paid"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          79.58895865697018,
+          13.71109571044101
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "id": 9,
+        "Name": "x9",
+        "Area": 400.983,
+        "Tax_Status": "Paid"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          79.588170247766,
+          13.712033003786765
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "id": 10,
+        "Name": "x10",
+        "Area": 2027.156,
+        "Tax_Status": "Paid"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          79.59321877365721,
+          13.70630096433656
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "id": 11,
+        "Name": "x11",
+        "Area": 1548.968,
+        "Tax_Status": "Paid"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          79.59408754646057,
+          13.706572508708398
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "id": 12,
+        "Name": "x12",
+        "Area": 1729.32,
+        "Tax_Status": "Paid"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          79.59402325558126,
+          13.707012393672107
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "id": 13,
+        "Name": "x13",
+        "Area": 1728.964,
+        "Tax_Status": "Paid"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          79.59394204604949,
+          13.707479348479739
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "id": 14,
+        "Name": "x14",
+        "Area": 672.153,
+        "Tax_Status": "Paid"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          79.59390144128359,
+          13.708074885045992
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "id": 15,
+        "Name": "x15",
+        "Area": 586.203,
+        "Tax_Status": "Paid"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          79.59383038294331,
+          13.708389571981572
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "id": 16,
+        "Name": "x16",
+        "Area": 732.941,
+        "Tax_Status": "Paid"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          79.59449021038888,
+          13.708382804520593
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "id": 17,
+        "Name": "x17",
+        "Area": 719.425,
+        "Tax_Status": "Paid"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          79.59456126872917,
+          13.708071501315505
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "id": 18,
+        "Name": "x18",
+        "Area": 719.076,
+        "Tax_Status": "Paid"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          79.59473045525368,
+          13.707743279457967
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "id": 19,
+        "Name": "x19",
+        "Area": 719.343,
+        "Tax_Status": "Paid"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          79.59480489732445,
+          13.707313545685725
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "id": 20,
+        "Name": "x20",
+        "Area": 1430.922,
+        "Tax_Status": "Paid"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          79.59287955467553,
+          13.709707535007462
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "id": 21,
+        "Name": "x21",
+        "Area": 1794.509,
+        "Tax_Status": "Paid"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          79.59374530890052,
+          13.71430926807499
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "id": 22,
+        "Name": "x22",
+        "Area": 3704.916,
+        "Tax_Status": "Paid"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          79.59070620983063,
+          13.714460391523133
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "id": 23,
+        "Name": "x23",
+        "Area": 5344.192,
+        "Tax_Status": "Paid"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          79.59146515533064,
+          13.715440420390294
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "id": 24,
+        "Name": "x24",
+        "Area": 6088.076,
+        "Tax_Status": "Paid"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          79.59125657615311,
+          13.716097365089741
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "id": 25,
+        "Name": "x25",
+        "Area": 5852.59,
+        "Tax_Status": "Paid"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          79.59095377519256,
+          13.717214026971314
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "id": 26,
+        "Name": "x26",
+        "Area": 4817.002,
+        "Tax_Status": "Paid"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          79.59179712253217,
+          13.717760265104454
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "id": 27,
+        "Name": "x27",
+        "Area": 1274.378,
+        "Tax_Status": "Paid"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          79.587571545145,
+          13.718025076373817
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "id": 28,
+        "Name": "x28",
+        "Area": 3290.55,
+        "Tax_Status": "Paid"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          79.58654351933284,
+          13.717815799194343
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "id": 29,
+        "Name": "x29",
+        "Area": 3243.397,
+        "Tax_Status": "Paid"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          79.58677361300616,
+          13.716912343153489
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "id": 30,
+        "Name": "x30",
+        "Area": 2936.908,
+        "Tax_Status": "Paid"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          79.58611145814439,
+          13.714844774767261
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "id": 31,
+        "Name": "x31",
+        "Area": 370.424,
+        "Tax_Status": "Paid"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          79.59181148309683,
+          13.707740930844516
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "id": 32,
+        "Name": "x32",
+        "Area": 269.283,
+        "Tax_Status": "Paid"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          79.59488116724528,
+          13.70647125457581
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "id": 33,
+        "Name": "x33",
+        "Area": 697.167,
+        "Tax_Status": "Paid"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          79.59645240462612,
+          13.707766927492118
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "id": 34,
+        "Name": "x34",
+        "Area": 224.025,
+        "Tax_Status": "Paid"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          79.5936250092333,
+          13.711186006584265
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "id": 35,
+        "Name": "x35",
+        "Area": 405.794,
+        "Tax_Status": "Paid"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          79.59245412022547,
+          13.716858475090241
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "id": 36,
+        "Name": "x36",
+        "Area": 712.224,
+        "Tax_Status": "Paid"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          79.59505378498532,
+          13.717053969880185
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "id": 37,
+        "Name": "x37",
+        "Area": 506.358,
+        "Tax_Status": "Paid"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          79.58823421440418,
+          13.716733691181817
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "id": 38,
+        "Name": "x38",
+        "Area": 354.368,
+        "Tax_Status": "Paid"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          79.59287955467553,
+          13.709707535007462
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "id": 21,
+        "Name": "x21",
+        "Area": 1794.509,
+        "Tax_Status": null
+      }
+    }
+  ]
+}
