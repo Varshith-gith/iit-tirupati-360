@@ -668,6 +668,14 @@ function close360Viewer() {
     modal.classList.remove('active');
   }
   
+  // Re-enable map interactions when modal closes
+  if (map) {
+    map.dragging.enable();
+    map.touchZoom.enable();
+    map.doubleClickZoom.enable();
+    map.scrollWheelZoom.enable();
+  }
+  
   isViewerLoading = false;
   isNavigating = false;
   
@@ -1200,6 +1208,14 @@ function show360ImageWithFallback(paths) {
     if (modal && viewerContainer) {
       modal.classList.add('active');
       
+      // Disable map interactions when modal opens
+      if (map) {
+        map.dragging.disable();
+        map.touchZoom.disable();
+        map.doubleClickZoom.disable();
+        map.scrollWheelZoom.disable();
+      }
+      
       // Hide DigiPin card when modal opens (especially on mobile)
       const digipinBox = document.getElementById('digipinBox');
       if (digipinBox) {
@@ -1224,6 +1240,14 @@ function show360ImageWithFallback(paths) {
   }
 
   modal.classList.add('active');
+  
+  // Disable map interactions when modal opens
+  if (map) {
+    map.dragging.disable();
+    map.touchZoom.disable();
+    map.doubleClickZoom.disable();
+    map.scrollWheelZoom.disable();
+  }
   
   // Hide DigiPin card when modal opens (especially on mobile)
   const digipinBox = document.getElementById('digipinBox');
@@ -1280,6 +1304,12 @@ map.on("click", e => {
   if (closest) {
     if (highlightMarker) map.removeLayer(highlightMarker);
     
+    // Automatically zoom in to the selected location
+    map.flyTo(closest.latlng, 18, {
+      duration: 0.8,
+      easeLinearity: 0.25
+    });
+    
     // For buildings, show a border circle instead of a filled dot
     if (closest.layerType === 'Building') {
       highlightMarker = L.circle(closest.latlng, {
@@ -1309,23 +1339,9 @@ map.on("click", e => {
     const lat = closest.latlng[0].toFixed(4);
     const lng = closest.latlng[1].toFixed(4);
     
-    // Add View 360 button for buildings with 360 images
+    // Add View 360 button for buildings
     if (closest.layerType === 'Building') {
-      const buildingName = (closest.properties.Name || closest.properties.name || '').toLowerCase().trim();
-      const buildingId = closest.properties.id;
-      console.log('=== BUILDING CLICKED ===');
-      console.log('Building ID:', buildingId);
-      console.log('Building Name:', closest.properties.Name || closest.properties.name || '(no name)');
-      
-      const isTechHubInnovation = buildingId === 26 || 
-                                   buildingName === 'tech hub innovation' || 
-                                   buildingName.includes('tech hub innovation') ||
-                                   buildingName.includes('techhub') ||
-                                   (buildingName.includes('tech') && buildingName.includes('hub') && buildingName.includes('innovation'));
-      
-      if (isTechHubInnovation) {
-        popupHTML += `<button id="view360Btn" class="view360-button">View 360°</button>`;
-      }
+      popupHTML += `<button id="view360Btn" class="view360-button" style="width:100%;margin-top:10px;padding:8px;background:#002b5c;color:white;border:none;border-radius:4px;cursor:pointer;font-weight:600;">View 360°</button>`;
     }
     
     highlightMarker.bindPopup(popupHTML).openPopup();
@@ -1335,41 +1351,96 @@ map.on("click", e => {
     if (closest.layerType === 'Building') {
       const buildingName = (closest.properties.Name || closest.properties.name || '').toLowerCase().trim();
       const buildingId = closest.properties.id;
-      const isTechHubInnovation = buildingId === 26 || 
-                                   buildingName === 'tech hub innovation' || 
-                                   buildingName.includes('tech hub innovation') ||
-                                   buildingName.includes('techhub') ||
-                                   (buildingName.includes('tech') && buildingName.includes('hub') && buildingName.includes('innovation'));
+      console.log('=== BUILDING CLICKED ===');
+      console.log('Building ID:', buildingId);
+      console.log('Building Name:', closest.properties.Name || closest.properties.name || '(no name)');
       
-      if (isTechHubInnovation) {
-        // Set up button click handler after a short delay to ensure DOM is ready
-        setTimeout(() => {
-          // Handle button in assetInfo panel
-          const view360Btn = document.getElementById("view360Btn");
-          if (view360Btn) {
-            // Remove any existing listeners by cloning
-            const newBtn = view360Btn.cloneNode(true);
-            view360Btn.parentNode.replaceChild(newBtn, view360Btn);
+      // Map building ID to app-files scene ID (extend this map as needed)
+      const buildingToSceneMap = {
+        26: '1-entrance' // Tech Hub Innovation -> Entrance
+        // Add more building mappings here as needed
+      };
+      
+      // Try to find scene by building ID, or use default (first scene)
+      const sceneId = buildingToSceneMap[buildingId] || '1-entrance';
+      
+      // Set up button click handler after a short delay to ensure DOM is ready
+      setTimeout(() => {
+        // Handle button in assetInfo panel
+        const view360Btn = document.getElementById("view360Btn");
+        if (view360Btn) {
+          // Remove any existing listeners by cloning
+          const newBtn = view360Btn.cloneNode(true);
+          view360Btn.parentNode.replaceChild(newBtn, view360Btn);
+          
+          newBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            e.preventDefault();
+            console.log('View 360 button clicked! Loading 360 image...');
             
-            newBtn.addEventListener('click', function(e) {
+            // Find image index by scene ID
+            const imageIndex = images360.findIndex(img => img.sceneId === sceneId);
+            if (imageIndex >= 0) {
+              console.log('Loading 360 image for building:', buildingId, 'Scene:', sceneId, 'Index:', imageIndex);
+              const modal = document.getElementById("viewer360Modal");
+              if (modal) {
+                modal.classList.add('active');
+                
+                // Disable map interactions when modal opens
+                if (map) {
+                  map.dragging.disable();
+                  map.touchZoom.disable();
+                  map.doubleClickZoom.disable();
+                  map.scrollWheelZoom.disable();
+                }
+                
+                // Hide DigiPin card when modal opens (especially on mobile)
+                const digipinBox = document.getElementById('digipinBox');
+                if (digipinBox) {
+                  digipinBox.style.display = 'none';
+                }
+                
+                load360Image(imageIndex);
+              }
+            } else {
+              // Fallback to path-based lookup
+              const possiblePaths = [
+                `app-files/tiles/${sceneId}/preview.jpg`,
+                `./app-files/tiles/${sceneId}/preview.jpg`,
+                `../app-files/tiles/${sceneId}/preview.jpg`
+              ];
+              console.log('Scene not found in array, trying paths:', possiblePaths);
+              show360ImageWithFallback(possiblePaths);
+            }
+          });
+        }
+        
+        // Also handle button in popup (use class selector since ID might conflict)
+        const popupContent = document.querySelector('.leaflet-popup-content');
+        if (popupContent) {
+          const popupBtn = popupContent.querySelector('.view360-button');
+          if (popupBtn && !popupBtn.hasAttribute('data-listener')) {
+            popupBtn.setAttribute('data-listener', 'true');
+            popupBtn.addEventListener('click', function(e) {
               e.stopPropagation();
               e.preventDefault();
-              console.log('View 360 button clicked! Loading 360 image...');
-              
-              // Map building ID to app-files scene ID
-              const buildingToSceneMap = {
-                26: '1-entrance' // Tech Hub Innovation -> Entrance
-              };
-              
-              const sceneId = buildingToSceneMap[buildingId] || '1-entrance';
+              console.log('View 360 button clicked from popup! Loading 360 image...');
               
               // Find image index by scene ID
               const imageIndex = images360.findIndex(img => img.sceneId === sceneId);
               if (imageIndex >= 0) {
-                console.log('Loading 360 image for building:', buildingId, 'Scene:', sceneId, 'Index:', imageIndex);
+                console.log('Loading 360 image for building (popup):', buildingId, 'Scene:', sceneId, 'Index:', imageIndex);
                 const modal = document.getElementById("viewer360Modal");
                 if (modal) {
                   modal.classList.add('active');
+                  
+                  // Disable map interactions when modal opens
+                  if (map) {
+                    map.dragging.disable();
+                    map.touchZoom.disable();
+                    map.doubleClickZoom.disable();
+                    map.scrollWheelZoom.disable();
+                  }
                   
                   // Hide DigiPin card when modal opens (especially on mobile)
                   const digipinBox = document.getElementById('digipinBox');
@@ -1382,74 +1453,17 @@ map.on("click", e => {
               } else {
                 // Fallback to path-based lookup
                 const possiblePaths = [
-                  `app-files/tiles/${sceneId}/preview.jpg`,
+                  `../app-files/tiles/${sceneId}/preview.jpg`,
                   `./app-files/tiles/${sceneId}/preview.jpg`,
-                  `../app-files/tiles/${sceneId}/preview.jpg`
+                  `app-files/tiles/${sceneId}/preview.jpg`
                 ];
                 console.log('Scene not found in array, trying paths:', possiblePaths);
                 show360ImageWithFallback(possiblePaths);
               }
             });
           }
-          
-          // Also handle button in popup (use class selector since ID might conflict)
-          const popupContent = document.querySelector('.leaflet-popup-content');
-          if (popupContent) {
-            const popupBtn = popupContent.querySelector('.view360-button');
-            if (popupBtn && !popupBtn.hasAttribute('data-listener')) {
-              popupBtn.setAttribute('data-listener', 'true');
-              popupBtn.addEventListener('click', function(e) {
-                e.stopPropagation();
-                e.preventDefault();
-                console.log('View 360 button clicked from popup! Loading 360 image...');
-                
-                // Map building ID to app-files scene ID
-                const buildingToSceneMap = {
-                  26: '1-entrance' // Tech Hub Innovation -> Entrance
-                };
-                
-                const sceneId = buildingToSceneMap[buildingId] || '1-entrance';
-                
-                // Find image index by scene ID
-                const imageIndex = images360.findIndex(img => img.sceneId === sceneId);
-                if (imageIndex >= 0) {
-                  console.log('Loading 360 image for building (popup):', buildingId, 'Scene:', sceneId, 'Index:', imageIndex);
-                  const modal = document.getElementById("viewer360Modal");
-                  if (modal) {
-                    modal.classList.add('active');
-                    
-                    // Hide DigiPin card when modal opens (especially on mobile)
-                    const digipinBox = document.getElementById('digipinBox');
-                    if (digipinBox) {
-                      digipinBox.style.display = 'none';
-                    }
-                    
-                    load360Image(imageIndex);
-                  }
-                } else {
-                  // Fallback to path-based lookup
-                  const possiblePaths = [
-                    `../app-files/tiles/${sceneId}/preview.jpg`,
-                    `./app-files/tiles/${sceneId}/preview.jpg`,
-                    `app-files/tiles/${sceneId}/preview.jpg`
-                  ];
-                  console.log('Scene not found in array, trying paths:', possiblePaths);
-                  show360ImageWithFallback(possiblePaths);
-                }
-              });
-            }
-          }
-        }, 100);
-      } else {
-        console.log('Not Tech Hub Innovation building. Building ID:', buildingId, 'Building name:', buildingName || '(no name)');
-        // Only close viewer if it's currently open
-        const modal = document.getElementById("viewer360Modal");
-        if (modal && modal.classList.contains('active')) {
-          close360Viewer();
         }
-      }
-    } else {
-      console.log('Clicked item is not a Building. Layer type:', closest.layerType);
+      }, 100);
     }
   } else {
     // Clear asset info if no asset clicked
@@ -1845,6 +1859,11 @@ function setup360ViewerClose() {
   const modal = document.getElementById("viewer360Modal");
   const modalContent = modal ? modal.querySelector('.viewer360-modal-content') : null;
   
+  // Track if user is dragging to prevent accidental closes
+  let isDragging = false;
+  let dragStartX = 0;
+  let dragStartY = 0;
+  
   if (closeBtn) {
     closeBtn.addEventListener('click', function(e) {
       e.preventDefault();
@@ -1854,18 +1873,96 @@ function setup360ViewerClose() {
   }
   
   if (modal) {
-    modal.addEventListener('click', function(e) {
-      // Only close if clicking directly on the modal background, not on modal content or its children
-      // Check if click is on modal itself (not on any child elements)
+    // Track mouse/touch down to detect drags
+    modal.addEventListener('mousedown', function(e) {
       if (e.target === modal || e.target.classList.contains('viewer360-modal')) {
-        // Double check - make sure we're not clicking on viewer container or its children
-        const viewerContainer = document.getElementById("viewer360Container");
-        if (viewerContainer && (viewerContainer.contains(e.target) || e.target === viewerContainer)) {
-          return; // Don't close if clicking on viewer
-        }
-        close360Viewer();
+        isDragging = false;
+        dragStartX = e.clientX;
+        dragStartY = e.clientY;
       }
     });
+    
+    modal.addEventListener('touchstart', function(e) {
+      if (e.target === modal || e.target.classList.contains('viewer360-modal')) {
+        isDragging = false;
+        if (e.touches && e.touches.length > 0) {
+          dragStartX = e.touches[0].clientX;
+          dragStartY = e.touches[0].clientY;
+        }
+      }
+    });
+    
+    // Track movement to detect drags
+    modal.addEventListener('mousemove', function(e) {
+      if (e.target === modal || e.target.classList.contains('viewer360-modal')) {
+        const deltaX = Math.abs(e.clientX - dragStartX);
+        const deltaY = Math.abs(e.clientY - dragStartY);
+        if (deltaX > 5 || deltaY > 5) {
+          isDragging = true;
+        }
+      }
+    });
+    
+    modal.addEventListener('touchmove', function(e) {
+      if (e.target === modal || e.target.classList.contains('viewer360-modal')) {
+        if (e.touches && e.touches.length > 0) {
+          const deltaX = Math.abs(e.touches[0].clientX - dragStartX);
+          const deltaY = Math.abs(e.touches[0].clientY - dragStartY);
+          if (deltaX > 5 || deltaY > 5) {
+            isDragging = true;
+          }
+        }
+      }
+    });
+    
+    // Removed click-to-close functionality - modal now only closes via close button or Escape key
+    // This prevents accidental closing when clicking on the black background
+    modal.addEventListener('click', function(e) {
+      // Prevent clicks on black background from doing anything
+      // Modal will only close via close button or Escape key
+      if (e.target === modal || e.target.classList.contains('viewer360-modal')) {
+        e.stopPropagation();
+        // Don't close the modal - user must use close button or Escape
+      }
+      // Reset drag flag after click
+      isDragging = false;
+    });
+    
+    // Disable map dragging when modal is open to prevent interference
+    if (map) {
+      // Use MutationObserver to watch for modal state changes
+      const observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+            const modal = document.getElementById("viewer360Modal");
+            if (modal && modal.classList.contains('active')) {
+              // Disable map dragging when modal is open
+              map.dragging.disable();
+              map.touchZoom.disable();
+              map.doubleClickZoom.disable();
+              map.scrollWheelZoom.disable();
+            } else {
+              // Re-enable map interactions when modal is closed
+              map.dragging.enable();
+              map.touchZoom.enable();
+              map.doubleClickZoom.enable();
+              map.scrollWheelZoom.enable();
+            }
+          }
+        });
+      });
+      
+      // Start observing the modal for class changes
+      observer.observe(modal, { attributes: true, attributeFilter: ['class'] });
+      
+      // Also check initial state
+      if (modal.classList.contains('active')) {
+        map.dragging.disable();
+        map.touchZoom.disable();
+        map.doubleClickZoom.disable();
+        map.scrollWheelZoom.disable();
+      }
+    }
     
     // Prevent clicks inside modal content from closing the modal
     if (modalContent) {
